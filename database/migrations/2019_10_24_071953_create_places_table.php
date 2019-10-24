@@ -20,6 +20,23 @@ class CreatePlacesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        
+        // Переносим данные
+        $places = [
+            'Krasnodar' => '1',
+            'Armavir' => '1',
+            'Sochi' => '1',
+            'Rostov-na-Donu' => '2',
+            'Stavropol' => '3',
+        ];
+        foreach ($places as $place=>$region) {
+            DB::table('places')->insert(
+                array(
+                    'name' => $place,
+                    'region_id' => $region,
+                )
+            );
+        }
     }
 
     /**

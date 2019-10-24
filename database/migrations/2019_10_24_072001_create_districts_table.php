@@ -20,6 +20,24 @@ class CreateDistrictsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        
+        // Переносим данные
+        $districts = [
+            'Karasunskiy' => '1',
+            'Prikubanskiy' => '1',
+            'Zavetnyi selskii okrug' => '2',
+            'Centralniy' => '3',
+            'Voroshilovskiy' => '4',
+            'Leninskiy' => '5',
+        ];
+        foreach ($districts as $district=>$place) {
+            DB::table('districts')->insert(
+                array(
+                    'name' => $district,
+                    'place_id' => $place,
+                )
+            );
+        }
     }
 
     /**
